@@ -38,20 +38,25 @@ class flervalgsspørsmål:
             return "Spiller 1: Riktig \nSpiller 2: Feil"
         else:
             return "Begge hadde feil"
-    
+
     def korrekt_svar_tekst(self):
-        return str(riktig_svar[spmNR])
+        return int(riktig_svar[spmNR]) + 1
     
     def __str__(self):
         return f"{self.tekst} \nAlternativene dine er {self.alternativ}"
 
 if __name__ == "__main__":
     spmNR = 0
-    spill = flervalgsspørsmål(spmNR)
+    
     for i in range(len(spørsmål)):
+        spill = flervalgsspørsmål(spmNR)
         print(spill)
-        gjett1 = str(input("\nHvilket tror du er riktig? (Spiller 1) "))
-        gjett2 = str(input("\nHvilket tror du er riktig? (Spiller 2) "))
+        gjett1 = int(input("\nHvilket tror du er riktig? (Spiller 1) "))
+        gjett1 = gjett1 - 1
+        gjett1 = str(gjett1)
+        gjett2 = int(input("\nHvilket tror du er riktig? (Spiller 2) "))
+        gjett2 = gjett2 - 1
+        gjett2 = str(gjett2)
         print("Det riktige svaret er:", spill.korrekt_svar_tekst())
         print(spill.sjekk_svar(gjett1, gjett2))
         spmNR += 1
