@@ -9,8 +9,7 @@ import re
 
 spørsmål = []
 mulige_svar = []
-riktig_svar = []
-spill_scenarioer = []
+
 score1 = []
 score2 = []
 
@@ -19,6 +18,7 @@ class flervalgsspørsmål:
     def __init__(self, spm, rkt, mlg):
         self.tekst = spm
         self.alternativ = mlg
+        self.riktig_svar = rkt
 #        self.spiller1_score = 0
 #        self.spiller2_score = 0
     
@@ -49,36 +49,39 @@ class flervalgsspørsmål:
 
     def korrekt_svar_tekst(self):
         #legger til 1 for bedre brukervennlighet v
-        return int(rkt) + 1
+        return int(self.riktig_svar) + 1
     
     def __str__(self):
         return f"{self.tekst} \nAlternativene dine er {self.alternativ}"
 
 #rekkefølgen spillet spilles
-def spillrekkefølge():
+def spillrekkefølge(objekt):
     #Printer "__str__" v
-    print(flervalgsspørsmål(spm, rkt, mlg))
+    print(objekt)
     gjett1 = int(input("\nHvilket tror du er riktig? (Spiller 1) "))
     gjett2 = int(input("\nHvilket tror du er riktig? (Spiller 2) "))
     #Sammenligner med svaret
-    print(flervalgsspørsmål(spm, rkt, mlg).sjekk_svar(gjett1, gjett2))
+    print(objekt.sjekk_svar(gjett1, gjett2))
     pass
 
-with open("sporsmaalsfil.txt", "r", encoding="UTF-8") as fil:
-    for row in fil:
-        new_list = re.split(":", row)
-        spørsmål.append(new_list[0])
-        spm = new_list[0]
-        rkt = new_list[1].replace(" ", "")
-        mlg = new_list[2].strip()
-        #Liste med alle spill objekter v
-        spill_scenarioer.append(flervalgsspørsmål(spm, rkt, mlg))
-        spillrekkefølge()
+def seFil():
+    spill_scenarioer = []
+    with open("sporsmaalsfil.txt", "r", encoding="UTF-8") as fil:
+        for row in fil:
+            new_list = re.split(":", row)
+            spørsmål.append(new_list[0])
+            spm = new_list[0]
+            rkt = new_list[1].replace(" ", "")
+            mlg = new_list[2].strip()
+            #Liste med alle spill objekter v
+            spill_scenarioer.append(flervalgsspørsmål(spm, rkt, mlg))
+    return spill_scenarioer
 
 if __name__ == "__main__":
-    spill = flervalgsspørsmål(spm, rkt, mlg)
 #    print("Spiller 1 score:", spill.spiller1_score)
 #    print("Spiller 2 score:", spill.spiller2_score)
+    quizliste = seFil()
+    for i in quizliste:
+        spillrekkefølge(i)
     print("Spiller 1 score:", len(score1))
     print("Spiller 2 score:", len(score2))
-    pass
