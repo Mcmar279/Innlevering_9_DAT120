@@ -19,8 +19,8 @@ class flervalgsspørsmål:
     def __init__(self, spm, rkt, mlg):
         self.tekst = spm
         self.alternativ = mlg
-        self.spiller1_score = 0
-        self.spiller2_score = 0
+#        self.spiller1_score = 0
+#        self.spiller2_score = 0
     
     def sjekk_svar(self, gjett1, gjett2):
         #Sjekker hva det korrekte svaret er
@@ -48,7 +48,7 @@ class flervalgsspørsmål:
             return "Begge hadde feil"
 
     def korrekt_svar_tekst(self):
-        #legger til 1 for bedre brukervennlighet
+        #legger til 1 for bedre brukervennlighet v
         return int(rkt) + 1
     
     def __str__(self):
@@ -56,7 +56,7 @@ class flervalgsspørsmål:
 
 #rekkefølgen spillet spilles
 def spillrekkefølge():
-    #Printer "__str__"
+    #Printer "__str__" v
     print(flervalgsspørsmål(spm, rkt, mlg))
     gjett1 = int(input("\nHvilket tror du er riktig? (Spiller 1) "))
     gjett2 = int(input("\nHvilket tror du er riktig? (Spiller 2) "))
@@ -71,7 +71,7 @@ with open("sporsmaalsfil.txt", "r", encoding="UTF-8") as fil:
         spm = new_list[0]
         rkt = new_list[1].replace(" ", "")
         mlg = new_list[2].strip()
-        #Liste med alle spill objekter
+        #Liste med alle spill objekter v
         spill_scenarioer.append(flervalgsspørsmål(spm, rkt, mlg))
         spillrekkefølge()
 
