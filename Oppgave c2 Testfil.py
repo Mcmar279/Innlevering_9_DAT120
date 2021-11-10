@@ -60,14 +60,14 @@ def seFil():
             new_list = re.split(":", row)
             spm = new_list[0]
             rkt = new_list[1].replace(" ", "")
+            
+            #newlist[2] er en streng
             a = new_list[2].replace("[", "")
             a = a.replace("]", "")
             a = a.replace("\n","")
             a = a.replace(" ", "")
             mlg = a.split(",")
-            print(a)
-            print(mlg)
-            print(type(mlg))
+            
             #Liste med alle spill objekter v
             spill_scenarioer.append(flervalgsspørsmål(spm, rkt, mlg))
     return spill_scenarioer
